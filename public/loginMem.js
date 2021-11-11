@@ -8,11 +8,12 @@ getForm.addEventListener('submit', async (e) => {
   const email = emailForm.value;
   const pass = passForm.value;
   try {
-    const result = await axios.post('/api/login', {
+    const { data: result } = await axios.post('/api/login', {
       email,
       pass,
     });
     if (result.hasOwnProperty('result')) {
+      window.location.href = 'http://localhost:3000/dashboardMember.html';
     } else {
       warn.innerHTML = 'Wrong Email or Password';
       warn.style.color = 'Red';

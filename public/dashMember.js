@@ -1,14 +1,26 @@
 const availbooks = document.querySelector('.avail-book');
 const loanbook = document.querySelector('.loan-book');
-const bookRender = document.querySelector('.books-render');
+const bookRenderDOM = document.querySelector('.books-render');
+const currUserDOM = document.querySelector('.curr-user');
+var currUser = null;
+window.onload = async () => {
+  try {
+    const { data: user } = await axios.get('/api/login');
+    if (!user.current) {
+      alert('Please Login First');
+      window.location.href = 'http://localhost:3000/';
+      return;
+    }
+    currUser = user.current[0];
+    currUserDOM.innerHTML = `Login as ${currUser.StudentName.substring(0, 11)}`;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 availbooks.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
-    const {
-      data: { result },
-    } = await axios.get(`/api/books/${1}`);
-    console.log(result);
     const headerhtml = [
       `  <tr>
       <th>BookTitle</th>
@@ -19,7 +31,10 @@ availbooks.addEventListener('click', async (e) => {
       <th>BookAmount</th>
     </tr>`,
     ];
-    console.log();
+    const {
+      data: { result },
+    } = await axios.get(`/api/books?type=${1}`);
+
     books = result.map((book) => {
       const {
         BookTitle,
@@ -41,8 +56,8 @@ availbooks.addEventListener('click', async (e) => {
     // console.log(books);
     books.unshift(headerhtml);
 
-    console.log(books);
-    bookRender.innerHTML = books;
+    // console.log(books);
+    bookRenderDOM.innerHTML = books;
   } catch (error) {
     console.log(error);
   }
@@ -51,7 +66,6 @@ availbooks.addEventListener('click', async (e) => {
 loanbook.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
-    const result = await axios.get(`/api/books/${2}`);
     const headerhtml = [
       `  <tr>
     <th>BookTitle</th>
@@ -60,8 +74,12 @@ loanbook.addEventListener('click', async (e) => {
     <th>BookYear</th>
     <th>BookGenre</th>
     <th>BookAmount</th>
+    <th>BorrowDate</th>
   </tr>`,
     ];
+    const {
+      data: { result },
+    } = await axios.get(`/api/books?nim=${currUser.StudentID}&type=${2}`);
     books = result.map((book) => {
       return `<tr>
       <th>${book.BookTitle}</th>
@@ -70,10 +88,11 @@ loanbook.addEventListener('click', async (e) => {
       <th>${book.BookYear}</th>
       <th>${book.BookGenre}</th>
       <th>${book.BookAmount}</th>
+      <th>${book.BorrowDate}</th>
     </tr>`;
     });
-    books = [...headerhtml, bookRender];
-    bookRender.innerHTML = books;
+    books.unshift(headerhtml);
+    bookRenderDOM.innerHTML = books;
   } catch (error) {
     console.log(error);
   }
