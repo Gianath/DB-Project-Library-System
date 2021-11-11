@@ -13,7 +13,6 @@ const port = 3000;
 const start = async () => {
   try {
     await sql.connect();
-    // console.log(await sql.query`select * from Products`);
     app.listen(port, console.log(`Server is listening on port ${port}...`));
   } catch (err) {
     console.log(error);
