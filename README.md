@@ -2,17 +2,22 @@
 Library System
 
 ## Installation
-Install nodejs from nodejs official website
+1. Install nodejs from nodejs official website
 https://nodejs.org/en/
 
-make sure database is created in SSMS
-
-## Usage
-in visual studio code terminal
+2. Open in Visual Studio Code
+ 
+3. Install Dependencies.
+Run in Visual Studio Code Terminal
 ```bash
 npm install
 ```
-after finish installing
+
+4. Make sure Database is created in SSMS
+
+## Usage
+
+1. Run in Visual Studio Code Terminal
 ```bash
 node app.js
 ```
