@@ -1,0 +1,26 @@
+.login {
+  height: 800px;
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login form {
+  padding: 3.8rem 3.8rem;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(105, 108, 109, 0.7);
+  border-radius: 10px;
+}
+.login Table {
+  width: 100%;
+}
+.login Table th {
+  padding: 0.1rem 0;
+}
+.registerNow a:hover {
+  cursor: pointer;
+  color: rgb(0, 78, 247);
+  transition: all 0.5s linear;
+}

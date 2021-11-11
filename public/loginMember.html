@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="login.css">
+  <title>Library</title>
+</head>
+<body>
+  <nav>
+    <div>
+      <a class="hoverEffectNav" href="index.html">Home</a>
+    </div>
+    <ul>
+      <li><a class="hoverEffectNav" href="loginStaff.html">Login as Staff</a></li>
+      <li><a class="hoverEffectNav" href="loginMember.html">Login as Member</a></li>
+    </ul>
+  </nav>
+  <div class="login">
+    <form class="login-form">
+      <Table>
+          <tr><th><h1 style="padding-bottom: 1rem;">Log in</h1></th></tr>
+          <tr><th><label for="Email">Your Email</label></th></tr>
+          <tr><th><input type="email" id="email" name="email" placeholder="flowerman@binus.ac.id" required></th></tr>
+          <tr><th><label for="password">Your Password</label></th></tr>
+          <tr><th><input type="password" id="password" name="password" placeholder="password" required></th></tr>
+          <tr><th class="login-validate"></th></tr>
+          <tr><th>
+            <div class="registerNow" style="font-size: 1rem; padding: 0.2rem 0;">
+              <p>Are you new?</p>
+              <a>Register Now</a>
+            </div>
+          </th></tr>
+          <tr><th><input type="submit" value="Login"></th></tr>
+      </Table>
+    </form>
+  </div>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+  integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+    <script src="./loginMem.js"></script>
+</body>
+</html>

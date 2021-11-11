@@ -1,0 +1,105 @@
+
+
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: hsl(210, 33%, 94%);
+}
+
+a{
+  padding: 0 0.5rem;
+  text-decoration: none;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+nav {
+  height: 60px;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav ul{
+  height: auto;
+  display: flex;
+  list-style-type: none;
+}
+
+
+nav ul a:hover{
+  padding: 0 0.5rem;
+}
+
+.hoverEffectNav:hover{
+  color: rgb(26, 193, 199);
+  transition: all 0.5s linear;
+  cursor: pointer;
+}
+
+nav p{
+  padding: 0 1rem;
+}
+
+.loginMenu{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  font-size: 1rem;
+}
+
+.loginMenu img{
+  width: 20%;
+  margin: 0.5rem 0;
+}
+
+.login-selection{
+  display: flex;
+}
+
+.login-selection div{
+  height: 4rem;
+  width: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0.5rem;
+  background-color: rgb(79, 199, 255);
+}
+
+.registerNow{
+  display: flex;
+}
+
+.loginMenu a:hover{
+  cursor: pointer;
+  color: rgb(0, 78, 247);
+  transition: all 0.5s linear;
+}
+
+/* .background{
+  background-image: url(bookBackground.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+} */

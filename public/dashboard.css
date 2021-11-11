@@ -1,0 +1,41 @@
+/* .loginInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+.loginInfo div:nth-child(1) {
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+.loginInfo div:nth-child(2) {
+  text-align: right;
+  color: black;
+}
+.hover-logout:hover {
+  color: rgb(255, 41, 41);
+  transition: all 0.5s linear;
+  cursor: pointer;
+}
+.user-img {
+  height: 110%;
+}
+.main-dash {
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  height: 10rem;
+}
+.show-options {
+  padding: 0 1rem;
+}
+.books-render {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.books-render th {
+  padding: 0 0.5rem;
+}
