@@ -5,6 +5,7 @@ const currUserDOM = document.querySelector('.curr-user');
 var currUser = null;
 window.onload = async () => {
   try {
+    bookRenderDOM.innerHTML = 'Please Choose An Option To Display Books';
     const { data: user } = await axios.get('/api/login');
     if (!user.current) {
       alert('Please Login First');
@@ -21,6 +22,7 @@ window.onload = async () => {
 availbooks.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
+    bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `  <tr>
       <th>BookTitle</th>
@@ -35,7 +37,11 @@ availbooks.addEventListener('click', async (e) => {
       data: { result },
     } = await axios.get(`/api/books?type=${1}`);
 
-    books = result.map((book) => {
+    if (result.length <= 0) {
+      bookRenderDOM.innerHTML = 'No Available book.';
+      return;
+    }
+    let books = result.map((book) => {
       const {
         BookTitle,
         BookAuthor,
@@ -57,7 +63,7 @@ availbooks.addEventListener('click', async (e) => {
     books.unshift(headerhtml);
 
     // console.log(books);
-    bookRenderDOM.innerHTML = books;
+    bookRenderDOM.innerHTML = books.join('');
   } catch (error) {
     console.log(error);
   }
@@ -66,6 +72,7 @@ availbooks.addEventListener('click', async (e) => {
 loanbook.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
+    bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `  <tr>
     <th>BookTitle</th>
@@ -80,7 +87,11 @@ loanbook.addEventListener('click', async (e) => {
     const {
       data: { result },
     } = await axios.get(`/api/books?nim=${currUser.StudentID}&type=${2}`);
-    books = result.map((book) => {
+    if (result.length <= 0) {
+      bookRenderDOM.innerHTML = 'No Book On Loan.';
+      return;
+    }
+    let books = result.map((book) => {
       return `<tr>
       <th>${book.BookTitle}</th>
       <th>${book.BookAuthor}</th>
@@ -92,7 +103,7 @@ loanbook.addEventListener('click', async (e) => {
     </tr>`;
     });
     books.unshift(headerhtml);
-    bookRenderDOM.innerHTML = books;
+    bookRenderDOM.innerHTML = books.join('');
   } catch (error) {
     console.log(error);
   }

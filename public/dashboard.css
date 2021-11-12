@@ -31,13 +31,20 @@
 }
 .books-render {
   display: flex;
+  border-collapse: collapse;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem 0;
+  background-color: rgb(255, 255, 255);
+}
+.books-render tr:nth-child(1) {
+  background-color: rgb(91, 196, 187);
+}
+.books-render tr:not(:nth-child(1)) {
+  border-bottom: 1px solid black;
 }
 .books-render th {
   padding: 1rem;
-  border-width: 1px;
   font-size: 1rem;
 }
