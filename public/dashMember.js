@@ -2,11 +2,14 @@ const availbooks = document.querySelector('.avail-book');
 const loanbook = document.querySelector('.loan-book');
 const bookRenderDOM = document.querySelector('.books-render');
 const currUserDOM = document.querySelector('.curr-user');
+const logoutDOM = document.querySelector('.hover-logout');
+const searchFormDOM = document.querySelector('.search-form');
 var currUser = null;
+var currBookOpt = null;
 window.onload = async () => {
   try {
     bookRenderDOM.innerHTML = 'Please Choose An Option To Display Books';
-    const { data: user } = await axios.get('/api/login');
+    const { data: user } = await axios.get('/api/login/member');
     if (!user.current) {
       alert('Please Login First');
       window.location.href = 'http://localhost:3000/';
@@ -18,6 +21,17 @@ window.onload = async () => {
     console.log(error);
   }
 };
+
+logoutDOM.addEventListener('click', async (e) => {
+  e.preventDefault();
+  try {
+    const { data: user } = await axios.delete('/api/login/member');
+    alert('You have logged out!');
+    window.location.href = 'http://localhost:3000/';
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 availbooks.addEventListener('click', async (e) => {
   e.preventDefault();

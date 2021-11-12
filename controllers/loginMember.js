@@ -18,8 +18,12 @@ const getMember = async (req, res) => {
     console.log(error);
   }
 };
-
+const logout = async (req, res) => {
+  current = null;
+  res.json({ msg: 'You have logged out' });
+};
 module.exports = {
   getMember,
   getCurrMember,
+  logout,
 };

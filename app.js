@@ -6,7 +6,7 @@ const sql = require('./db/connect');
 
 app.use(express.static('./public'));
 app.use(express.json());
-app.use('/api/login', loginMember);
+app.use('/api/login/member', loginMember);
 app.use('/api/books', getBook);
 
 const port = 3000;

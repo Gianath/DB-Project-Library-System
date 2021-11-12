@@ -8,7 +8,7 @@ getForm.addEventListener('submit', async (e) => {
   const email = emailForm.value;
   const pass = passForm.value;
   try {
-    const { data: result } = await axios.post('/api/login', {
+    const { data: result } = await axios.post('/api/login/member', {
       email,
       pass,
     });
