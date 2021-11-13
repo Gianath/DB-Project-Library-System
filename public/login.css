@@ -26,8 +26,13 @@
 .login Table th {
   padding: 0.1rem 0;
 }
+
+.registerNow a {
+  color: rgb(0, 136, 255);
+}
+
 .registerNow a:hover {
   cursor: pointer;
-  color: rgb(0, 78, 247);
+  color: rgb(133, 133, 133);
   transition: all 0.5s linear;
 }

@@ -39,12 +39,12 @@ availbooks.addEventListener('change', async (e) => {
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `  <tr>
-      <th>BookTitle</th>
-      <th>BookAuthor</th>
-      <th>BookPublisher</th>
-      <th>BookYear</th>
-      <th>BookGenre</th>
-      <th>BookAmount</th>
+      <th>Book Title</th>
+      <th>Book Author</th>
+      <th>Book Publisher</th>
+      <th>Book Year</th>
+      <th>Book Genre</th>
+      <th>Book Amount</th>
     </tr>`,
     ];
     const {
@@ -87,12 +87,12 @@ loanbook.addEventListener('change', async (e) => {
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `  <tr>
-    <th>BookTitle</th>
-    <th>BookAuthor</th>
-    <th>BookPublisher</th>
-    <th>BookYear</th>
-    <th>BookGenre</th>
-    <th>BorrowDate</th>
+    <th>Book Title</th>
+    <th>Book Author</th>
+    <th>Book Publisher</th>
+    <th>Book Year</th>
+    <th>Book Genre</th>
+    <th>Borrow Date</th>
   </tr>`,
     ];
     const {
@@ -126,12 +126,12 @@ searchFormDOM.addEventListener('submit', async (e) => {
     if (availbooks.checked) {
       const headerhtml = [
         `  <tr>
-        <th>BookTitle</th>
-        <th>BookAuthor</th>
-        <th>BookPublisher</th>
-        <th>BookYear</th>
-        <th>BookGenre</th>
-        <th>BookAmount</th>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>Book Publisher</th>
+        <th>Book Year</th>
+        <th>Book Genre</th>
+        <th>Book Amount</th>
       </tr>`,
       ];
       const {
@@ -166,12 +166,12 @@ searchFormDOM.addEventListener('submit', async (e) => {
     } else if (loanbook.checked) {
       const headerhtml = [
         `  <tr>
-      <th>BookTitle</th>
-      <th>BookAuthor</th>
-      <th>BookPublisher</th>
-      <th>BookYear</th>
-      <th>BookGenre</th>
-      <th>BorrowDate</th>
+      <th>Book Title</th>
+      <th>Book Author</th>
+      <th>Book Publisher</th>
+      <th>Book Year</th>
+      <th>Book Genre</th>
+      <th>Borrow Date</th>
     </tr>`,
       ];
       const {

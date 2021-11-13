@@ -1,8 +1,14 @@
-/* .loginInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
 .loginInfo div:nth-child(1) {
   height: 20px;
   display: flex;
@@ -63,4 +69,18 @@
 .show-options input[type='radio']:checked + label {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+}
+#search {
+  padding: 0.5rem 0.7rem;
+  margin-bottom: -0.4rem;
+  border-radius: 16px;
+}
+#search:hover,
+#search:focus {
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+  border-radius: 0;
+  transition: all 0.5s linear;
 }

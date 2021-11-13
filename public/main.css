@@ -1,8 +1,6 @@
-
-
 /* Font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 
 *,
 ::after,
@@ -12,15 +10,16 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   background-color: hsl(210, 33%, 94%);
+  font-family: 'Didact Gothic', sans-serif;
 }
 
-a{
+a {
   padding: 0 0.5rem;
   text-decoration: none;
   color: black;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-weight: bold;
 }
 
@@ -31,35 +30,34 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-size: 1.2rem;
   background-color: white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav ul{
+nav ul {
   height: auto;
   display: flex;
   list-style-type: none;
 }
 
-
-nav ul a:hover{
+nav ul a:hover {
   padding: 0 0.5rem;
 }
 
-.hoverEffectNav:hover{
+.hoverEffectNav:hover {
   color: rgb(26, 193, 199);
   transition: all 0.5s linear;
   cursor: pointer;
 }
 
-nav p{
+nav p {
   padding: 0 1rem;
 }
 
-.loginMenu{
-  font-family: 'Roboto', sans-serif;
+.loginMenu {
+  /* font-family: 'Roboto', sans-serif; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,16 +65,16 @@ nav p{
   font-size: 1rem;
 }
 
-.loginMenu img{
+.loginMenu img {
   width: 20%;
   margin: 0.5rem 0;
 }
 
-.login-selection{
+.login-selection {
   display: flex;
 }
 
-.login-selection div{
+.login-selection div {
   height: 4rem;
   width: 9rem;
   display: flex;
@@ -86,11 +84,11 @@ nav p{
   background-color: rgb(79, 199, 255);
 }
 
-.registerNow{
+.registerNow {
   display: flex;
 }
 
-.loginMenu a:hover{
+.loginMenu a:hover {
   cursor: pointer;
   color: rgb(0, 78, 247);
   transition: all 0.5s linear;
