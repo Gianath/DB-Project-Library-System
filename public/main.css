@@ -84,20 +84,8 @@ nav p {
   background-color: rgb(79, 199, 255);
 }
 
-.registerNow {
-  display: flex;
-}
-
 .loginMenu a:hover {
   cursor: pointer;
   color: rgb(0, 78, 247);
   transition: all 0.5s linear;
 }
-
-/* .background{
-  background-image: url(bookBackground.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100%;
-} */
