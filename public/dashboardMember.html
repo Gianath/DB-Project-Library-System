@@ -23,8 +23,10 @@
   </nav>
   <div class="main-dash">
     <div class="show-options">
-      <button class="avail-book">Show Available Books</button>
-      <button class="loan-book">Show Current Book On Loan</button>
+      <input id="avail-book" type="radio" name="opt"></input>
+      <label for="avail-book">Available Books</label>
+      <input id="loan-book" type="radio" name="opt"></input>
+      <label for="loan-book">My books</label>
     </div>
     <form class="search-form">
       <label for="Search">Search : </label>
@@ -33,6 +35,22 @@
     </form>
   </div>
   <table class="books-render">
+    <tr>
+      <th>BookTitle</th>
+      <th>BookAuthor</th>
+      <th>BookPublisher</th>
+      <th>BookYear</th>
+      <th>BookGenre</th>
+      <th>BookAmount</th>
+    </tr>
+    <tr>
+      <th>BookTitle</th>
+      <th>BookAuthor</th>
+      <th>BookPublisher</th>
+      <th>BookYear</th>
+      <th>BookGenre</th>
+      <th>BookAmount</th>
+    </tr>
   </table>
   <script
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"

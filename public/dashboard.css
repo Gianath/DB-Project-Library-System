@@ -29,6 +29,13 @@
 .show-options {
   padding: 0 1rem;
 }
+.show-options label {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  border-radius: 2px;
+  padding: 0.5rem 0.8rem;
+}
 .books-render {
   display: flex;
   border-collapse: collapse;
@@ -36,7 +43,9 @@
   align-items: center;
   justify-content: center;
   padding: 1rem 0;
+  margin: 0.4rem 0;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 0.2rem 0 rgb(0, 0, 0);
 }
 .books-render tr:nth-child(1) {
   background-color: rgb(91, 196, 187);
@@ -47,4 +56,11 @@
 .books-render th {
   padding: 1rem;
   font-size: 1rem;
+}
+.show-options input[type='radio'] {
+  display: none;
+}
+.show-options input[type='radio']:checked + label {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }

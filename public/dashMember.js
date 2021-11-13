@@ -1,11 +1,11 @@
-const availbooks = document.querySelector('.avail-book');
-const loanbook = document.querySelector('.loan-book');
+const availbooks = document.querySelector('#avail-book');
+const loanbook = document.querySelector('#loan-book');
 const bookRenderDOM = document.querySelector('.books-render');
 const currUserDOM = document.querySelector('.curr-user');
 const logoutDOM = document.querySelector('.hover-logout');
 const searchFormDOM = document.querySelector('.search-form');
+const searchBar = document.querySelector('#search');
 var currUser = null;
-var currBookOpt = null;
 window.onload = async () => {
   try {
     bookRenderDOM.innerHTML = 'Please Choose An Option To Display Books';
@@ -33,7 +33,7 @@ logoutDOM.addEventListener('click', async (e) => {
   }
 });
 
-availbooks.addEventListener('click', async (e) => {
+availbooks.addEventListener('change', async (e) => {
   e.preventDefault();
   try {
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
@@ -73,17 +73,15 @@ availbooks.addEventListener('click', async (e) => {
         <th>${BookAmount}</th>
       </tr>`;
     });
-    // console.log(books);
     books.unshift(headerhtml);
 
-    // console.log(books);
     bookRenderDOM.innerHTML = books.join('');
   } catch (error) {
     console.log(error);
   }
 });
 
-loanbook.addEventListener('click', async (e) => {
+loanbook.addEventListener('change', async (e) => {
   e.preventDefault();
   try {
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
@@ -94,7 +92,6 @@ loanbook.addEventListener('click', async (e) => {
     <th>BookPublisher</th>
     <th>BookYear</th>
     <th>BookGenre</th>
-    <th>BookAmount</th>
     <th>BorrowDate</th>
   </tr>`,
     ];
@@ -112,12 +109,93 @@ loanbook.addEventListener('click', async (e) => {
       <th>${book.BookPublisher}</th>
       <th>${book.BookYear}</th>
       <th>${book.BookGenre}</th>
-      <th>${book.BookAmount}</th>
-      <th>${book.BorrowDate}</th>
+      <th>${book.BorrowDate.substring(0, 10)}</th>
     </tr>`;
     });
     books.unshift(headerhtml);
     bookRenderDOM.innerHTML = books.join('');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+searchFormDOM.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    const toSearch = searchBar.value;
+    if (availbooks.checked) {
+      const headerhtml = [
+        `  <tr>
+        <th>BookTitle</th>
+        <th>BookAuthor</th>
+        <th>BookPublisher</th>
+        <th>BookYear</th>
+        <th>BookGenre</th>
+        <th>BookAmount</th>
+      </tr>`,
+      ];
+      const {
+        data: { result },
+      } = await axios.get(`/api/books?type=${1}&search=${toSearch}`);
+
+      if (result.length <= 0) {
+        bookRenderDOM.innerHTML = 'No Found.';
+        return;
+      }
+      let books = result.map((book) => {
+        const {
+          BookTitle,
+          BookAuthor,
+          BookPublisher,
+          BookYear,
+          BookGenre,
+          BookAmount,
+        } = book;
+        return `<tr>
+          <th>${BookTitle}</th>
+          <th>${BookAuthor}</th>
+          <th>${BookPublisher}</th>
+          <th>${BookYear}</th>
+          <th>${BookGenre}</th>
+          <th>${BookAmount}</th>
+        </tr>`;
+      });
+      books.unshift(headerhtml);
+
+      bookRenderDOM.innerHTML = books.join('');
+    } else if (loanbook.checked) {
+      const headerhtml = [
+        `  <tr>
+      <th>BookTitle</th>
+      <th>BookAuthor</th>
+      <th>BookPublisher</th>
+      <th>BookYear</th>
+      <th>BookGenre</th>
+      <th>BorrowDate</th>
+    </tr>`,
+      ];
+      const {
+        data: { result },
+      } = await axios.get(
+        `/api/books?nim=${currUser.StudentID}&type=${2}&search=${toSearch}`
+      );
+      if (result.length <= 0) {
+        bookRenderDOM.innerHTML = 'Not Found.';
+        return;
+      }
+      let books = result.map((book) => {
+        return `<tr>
+        <th>${book.BookTitle}</th>
+        <th>${book.BookAuthor}</th>
+        <th>${book.BookPublisher}</th>
+        <th>${book.BookYear}</th>
+        <th>${book.BookGenre}</th>
+        <th>${book.BorrowDate.substring(0, 10)}</th>
+      </tr>`;
+      });
+      books.unshift(headerhtml);
+      bookRenderDOM.innerHTML = books.join('');
+    }
   } catch (error) {
     console.log(error);
   }
