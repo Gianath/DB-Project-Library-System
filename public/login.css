@@ -1,7 +1,7 @@
 .login {
   height: 800px;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +12,13 @@
   text-align: center;
   box-shadow: 0 2px 5px rgba(105, 108, 109, 0.7);
   border-radius: 10px;
+}
+.login form input {
+  padding: 0.5rem 1.5rem;
+  border-radius: 2px;
+  outline-color: rgb(148, 164, 255);
+  word-wrap: break-word;
+  color: rgb(0, 0, 0);
 }
 .login Table {
   width: 100%;
