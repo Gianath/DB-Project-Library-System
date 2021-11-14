@@ -38,6 +38,7 @@ logoutDOM.addEventListener('click', async (e) => {
 showbooksDOM.addEventListener('change', async (e) => {
   e.preventDefault();
   try {
+    searchBar.placeholder = 'Enter Book Title';
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `<tr>
@@ -54,7 +55,7 @@ showbooksDOM.addEventListener('change', async (e) => {
     ];
     const {
       data: { result },
-    } = await axios.get(`/api/books?type=${1}`);
+    } = await axios.get(`/api/books?type=${1}&showAll=true`);
 
     if (result.length <= 0) {
       bookRenderDOM.innerHTML = 'No Available book.';
@@ -93,6 +94,7 @@ showbooksDOM.addEventListener('change', async (e) => {
 returnbooksDOM.addEventListener('change', async (e) => {
   e.preventDefault();
   try {
+    searchBar.placeholder = 'Enter Student ID';
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
     const headerhtml = [
       `<tr>
@@ -129,6 +131,100 @@ returnbooksDOM.addEventListener('change', async (e) => {
     });
     books.unshift(headerhtml);
     bookRenderDOM.innerHTML = books.join('');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+searchFormDOM.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    bookRenderDOM.innerHTML = 'Loading, Please wait...';
+    const toSearch = searchBar.value;
+    if (showbooksDOM.checked) {
+      const headerhtml = [
+        `<tr>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>Book Publisher</th>
+        <th>Book Year</th>
+        <th>Book Genre</th>
+        <th>Book Amount</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Borrow</th>
+      </tr>`,
+      ];
+      const {
+        data: { result },
+      } = await axios.get(`/api/books?type=${1}&search=${toSearch}`);
+
+      if (result.length <= 0) {
+        bookRenderDOM.innerHTML = 'No Found.';
+        return;
+      }
+      let books = result.map((book) => {
+        const {
+          BookID,
+          BookTitle,
+          BookAuthor,
+          BookPublisher,
+          BookYear,
+          BookGenre,
+          BookAmount,
+        } = book;
+        return `<tr>
+          <th>${BookTitle}</th>
+          <th>${BookAuthor}</th>
+          <th>${BookPublisher}</th>
+          <th>${BookYear}</th>
+          <th>${BookGenre}</th>
+          <th>${BookAmount}</th>
+          <th class="btn"><button class="logo" data-id="${BookID}"><img src="edit.png"></button></th>
+          <th class="btn"><button class="logo" data-id="${BookID}"><img src="bin.png"></button></th>
+          <th class="btn"><button class="logo" data-id="${BookID}"><img src="borrowing.png"></button></th>
+        </tr>`;
+      });
+      books.unshift(headerhtml);
+
+      bookRenderDOM.innerHTML = books.join('');
+    } else if (returnbooksDOM.checked) {
+      const headerhtml = [
+        `<tr>
+      <th>Student ID</th>
+      <th>Book Title</th>
+      <th>Book Author</th>
+      <th>Book Publisher</th>
+      <th>Book Year</th>
+      <th>Book Genre</th>
+      <th>Borrow Date</th>
+      <th>Return</th>
+    </tr>`,
+      ];
+      const {
+        data: { result },
+      } = await axios.get(`/api/books?type=${3}&search=${toSearch}`);
+      if (result.length <= 0) {
+        bookRenderDOM.innerHTML = 'Not Found.';
+        return;
+      }
+      let books = result.map((book) => {
+        return `<tr>
+      <th>${book.StudentID}</th>
+      <th>${book.BookTitle}</th>
+      <th>${book.BookAuthor}</th>
+      <th>${book.BookPublisher}</th>
+      <th>${book.BookYear}</th>
+      <th>${book.BookGenre}</th>
+      <th>${book.BorrowDate.substring(0, 10)}</th>
+      <th class="btn"><button class="logo" data-id="${
+        book.BorrowID
+      }"><img src="return.png" /></button></th>
+    </tr>`;
+      });
+      books.unshift(headerhtml);
+      bookRenderDOM.innerHTML = books.join('');
+    }
   } catch (error) {
     console.log(error);
   }
