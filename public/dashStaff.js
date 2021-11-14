@@ -35,8 +35,7 @@ logoutDOM.addEventListener('click', async (e) => {
   }
 });
 
-showbooksDOM.addEventListener('change', async (e) => {
-  e.preventDefault();
+const showAllBooks = async () => {
   try {
     searchBar.placeholder = 'Enter Book Title';
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
@@ -78,9 +77,9 @@ showbooksDOM.addEventListener('change', async (e) => {
         <th>${BookYear}</th>
         <th>${BookGenre}</th>
         <th>${BookAmount}</th>
-        <th class="btn"><button class="logo" data-id="${BookID}"><img src="edit.png"></button></th>
-        <th class="btn"><button class="logo" data-id="${BookID}"><img src="bin.png"></button></th>
-        <th class="btn"><button class="logo" data-id="${BookID}"><img src="borrowing.png"></button></th>
+        <th class="btn"><button class="btn-edit" data-id="${BookID}"><img src="edit.png"></button></th>
+        <th class="btn"><button class="btn-delete" data-id="${BookID}"><img src="bin.png"></button></th>
+        <th class="btn"><button class="btn-borrow" data-id="${BookID}"><img src="borrowing.png"></button></th>
       </tr>`;
     });
     books.unshift(headerhtml);
@@ -89,10 +88,14 @@ showbooksDOM.addEventListener('change', async (e) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+showbooksDOM.addEventListener('change', async (e) => {
+  e.preventDefault();
+  showAllBooks();
 });
 
-returnbooksDOM.addEventListener('change', async (e) => {
-  e.preventDefault();
+const showReturnBook = async () => {
   try {
     searchBar.placeholder = 'Enter Student ID';
     bookRenderDOM.innerHTML = 'Loading, Please wait...';
@@ -124,9 +127,9 @@ returnbooksDOM.addEventListener('change', async (e) => {
       <th>${book.BookYear}</th>
       <th>${book.BookGenre}</th>
       <th>${book.BorrowDate.substring(0, 10)}</th>
-      <th class="btn"><button class="logo" data-id="${
+      <th class="btn"><button class="btn-return" data-id="${
         book.BorrowID
-      }"><img src="return.png" /></button></th>
+      }"><img src="return.png"></button></th>
     </tr>`;
     });
     books.unshift(headerhtml);
@@ -134,6 +137,11 @@ returnbooksDOM.addEventListener('change', async (e) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+returnbooksDOM.addEventListener('change', async (e) => {
+  e.preventDefault();
+  showReturnBook();
 });
 
 searchFormDOM.addEventListener('submit', async (e) => {
@@ -180,9 +188,9 @@ searchFormDOM.addEventListener('submit', async (e) => {
           <th>${BookYear}</th>
           <th>${BookGenre}</th>
           <th>${BookAmount}</th>
-          <th class="btn"><button class="logo" data-id="${BookID}"><img src="edit.png"></button></th>
-          <th class="btn"><button class="logo" data-id="${BookID}"><img src="bin.png"></button></th>
-          <th class="btn"><button class="logo" data-id="${BookID}"><img src="borrowing.png"></button></th>
+          <th class="btn"><button class="btn-edit" data-id="${BookID}"><img src="edit.png"></button></th>
+          <th class="btn"><button class="btn-delete" data-id="${BookID}"><img src="bin.png"></button></th>
+          <th class="btn"><button class="btn-borrow" data-id="${BookID}"><img src="borrowing.png"></button></th>
         </tr>`;
       });
       books.unshift(headerhtml);
@@ -217,9 +225,9 @@ searchFormDOM.addEventListener('submit', async (e) => {
       <th>${book.BookYear}</th>
       <th>${book.BookGenre}</th>
       <th>${book.BorrowDate.substring(0, 10)}</th>
-      <th class="btn"><button class="logo" data-id="${
+      <th class="btn"><button class="btn-return" data-id="${
         book.BorrowID
-      }"><img src="return.png" /></button></th>
+      }"><img src="return.png"></button></th>
     </tr>`;
       });
       books.unshift(headerhtml);
@@ -227,5 +235,20 @@ searchFormDOM.addEventListener('submit', async (e) => {
     }
   } catch (error) {
     console.log(error);
+  }
+});
+
+bookRenderDOM.addEventListener('click', async (e) => {
+  const el = e.target;
+  if (el.parentElement.classList.contains('btn-delete')) {
+    const id = el.parentElement.dataset.id;
+    try {
+      const {
+        data: { result },
+      } = await axios.delete(`/api/books/${id}`);
+      showAllBooks();
+    } catch (error) {
+      console.log(error);
+    }
   }
 });

@@ -120,12 +120,13 @@
   width: 5rem;
 }
 
-.logo {
+.btn > button {
   width: 50%;
   background: transparent;
   border: transparent;
 }
 
-.logo > img {
+.btn > button > img {
   width: 100%;
+  cursor: pointer;
 }

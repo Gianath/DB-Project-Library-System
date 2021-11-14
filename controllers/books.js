@@ -50,4 +50,14 @@ const getBooks = async (req, res) => {
   }
 };
 
-module.exports = getBooks;
+const deleteBook = async (req, res) => {
+  const id = req.params.id;
+  const result = await sql.query`DELETE FROM Book
+        WHERE BookID = ${id}`;
+  res.json({ result: result.rowsAffected });
+};
+
+module.exports = {
+  getBooks,
+  deleteBook,
+};
