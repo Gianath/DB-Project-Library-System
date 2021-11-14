@@ -1,0 +1,87 @@
+.loginInfo div:nth-child(1) {
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.loginInfo div:nth-child(2) {
+  text-align: right;
+  color: black;
+}
+
+.hover-logout:hover {
+  color: rgb(255, 41, 41);
+  transition: all 0.5s linear;
+  cursor: pointer;
+}
+
+.user-img {
+  height: 110%;
+}
+
+.main-dash {
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  height: 10rem;
+}
+
+.show-options {
+  padding: 0 1rem;
+}
+
+.show-options label {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  border-radius: 2px;
+  padding: 0.5rem 0.8rem;
+}
+
+.books-render {
+  display: flex;
+  border-collapse: collapse;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  margin: 0.4rem 0;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0.2rem 0 rgb(0, 0, 0);
+}
+
+.books-render tr:nth-child(1) {
+  background-color: rgb(91, 196, 187);
+}
+
+.books-render tr:not(:nth-child(1)) {
+  border-bottom: 1px solid black;
+}
+
+.books-render th {
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.show-options input[type='radio'] {
+  display: none;
+}
+
+.show-options input[type='radio']:checked + label {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.btn {
+  width: 5rem;
+}
+
+.logo {
+  width: 50%;
+  background: transparent;
+  border: transparent;
+}
+
+.logo > img {
+  width: 100%;
+}

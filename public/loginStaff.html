@@ -19,16 +19,25 @@
     </ul>
   </nav>
   <div class="login">
-    <form action="">
+    <form class="login-form">
       <Table>
           <tr><th><h1 style="padding-bottom: 1rem;">Log in</h1></th></tr>
           <tr><th><label for="username">Your Username</label></th></tr>
           <tr><th><input type="text" id="username" name="username" placeholder="username" required></th></tr>
           <tr><th><label for="password">Your Password</label></th></tr>
           <tr><th><input type="password" id="password" name="password" placeholder="password" required></th></tr>
+          <tr><th class="login-validate"></th></tr>
           <tr><th><input type="submit" value="Login"></th></tr>
       </Table>
     </form>
   </div>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+  integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+    <script src="./loginStaff.js"></script>
+</body>
 </body>
 </html>

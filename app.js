@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const loginMember = require('./routes/loginMember');
+const loginStaff = require('./routes/loginStaff');
 const getBook = require('./routes/books');
 const sql = require('./db/connect');
 
 app.use(express.static('./public'));
 app.use(express.json());
 app.use('/api/login/member', loginMember);
+app.use('/api/login/staff', loginStaff);
 app.use('/api/books', getBook);
 
 const port = 3000;
