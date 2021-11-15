@@ -18,6 +18,16 @@ const publisherFormAdd = document.querySelector('#publisherA');
 const yearFormAdd = document.querySelector('#yearA');
 const genreFormAdd = document.querySelector('#genreA');
 const amountFormAdd = document.querySelector('#amountA');
+// pop-up Update
+const containerUpdate = document.querySelector('.container-update');
+const formUpdateDOM = document.querySelector('#update');
+const exitbtnUpdate = document.querySelector('.exit-btnUpdate');
+const titleFormUpdate = document.querySelector('#titleU');
+const authorFormUpdate = document.querySelector('#authorU');
+const publisherFormUpdate = document.querySelector('#publisherU');
+const yearFormUpdate = document.querySelector('#yearU');
+const genreFormUpdate = document.querySelector('#genreU');
+const amountFormUpdate = document.querySelector('#amountU');
 
 var currUser = null;
 
@@ -266,7 +276,27 @@ bookRenderDOM.addEventListener('click', async (e) => {
         console.log(error);
       }
     }
-  } else if (el.parentElement.classList.contains('btn-borrow')) {
+  } else if (el.parentElement.classList.contains('btn-edit')) {
+    const id = el.parentElement.dataset.id;
+    overlay.dataset.id = id;
+    try {
+      const {
+        data: { result },
+      } = await axios.get(`/api/books/${id}`);
+      titleFormUpdate.value = result[0].BookTitle;
+      authorFormUpdate.value =
+        result[0].BookAuthor != null ? result[0].BookAuthor : '';
+      publisherFormUpdate.value =
+        result[0].BookPublisher != null ? result[0].BookPublisher : '';
+      yearFormUpdate.value =
+        result[0].BookYear != null ? result[0].BookYear : '';
+      genreFormUpdate.value =
+        result[0].BookGenre != null ? result[0].BookGenre : '';
+      amountFormUpdate.value = result[0].BookAmount;
+      updateBook();
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 
@@ -284,15 +314,27 @@ exitbtnAdd.addEventListener('click', (e) => {
   containerAdd.style.display = 'none';
 });
 
+exitbtnUpdate.addEventListener('click', (e) => {
+  overlay.style.display = 'none';
+  containerUpdate.style.display = 'none';
+});
+
 function addBook() {
   overlay.style.display = 'flex';
   containerAdd.style.display = 'block';
 }
 
+function updateBook() {
+  overlay.style.display = 'flex';
+  containerUpdate.style.display = 'block';
+}
+
 formAddDOM.addEventListener('submit', async (e) => {
   e.preventDefault();
+
   overlay.style.display = 'none';
   containerAdd.style.display = 'none';
+
   alert('Success! Book Added');
   let title = titleFormAdd.value;
   let author = authorFormAdd.value;
@@ -301,10 +343,58 @@ formAddDOM.addEventListener('submit', async (e) => {
   let genre = genreFormAdd.value;
   let amount = amountFormAdd.value;
 
+  titleFormAdd.value = '';
+  authorFormAdd.value = '';
+  publisherFormAdd.value = '';
+  yearFormAdd.value = '';
+  genreFormAdd.value = '';
+  amountFormAdd.value = '';
+
   try {
     const {
       data: { result },
     } = await axios.post(`/api/books/`, {
+      title,
+      author,
+      publisher,
+      year,
+      genre,
+      amount,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  if (showbooksDOM.checked) {
+    showAllBooks();
+  }
+});
+
+formUpdateDOM.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  overlay.style.display = 'none';
+  containerUpdate.style.display = 'none';
+
+  alert('Success! Book Updated');
+  const id = overlay.dataset.id;
+  let title = titleFormUpdate.value;
+  let author = authorFormUpdate.value;
+  let publisher = publisherFormUpdate.value;
+  let year = yearFormUpdate.value;
+  let genre = genreFormUpdate.value;
+  let amount = amountFormUpdate.value;
+
+  titleFormUpdate.value = '';
+  authorFormUpdate.value = '';
+  publisherFormUpdate.value = '';
+  yearFormUpdate.value = '';
+  genreFormUpdate.value = '';
+  amountFormUpdate.value = '';
+
+  try {
+    const {
+      data: { result },
+    } = await axios.patch(`/api/books/${id}`, {
       title,
       author,
       publisher,

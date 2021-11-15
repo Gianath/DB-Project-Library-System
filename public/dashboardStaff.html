@@ -43,7 +43,7 @@
         </form>
     </div>
     <table class="books-render"></table>
-    <div class="overlay">
+    <div class="overlay" data-id="">
         <div class="container-add">
             <div class="exit-btnAdd">
                 <img src="cross.png" alt="">
@@ -78,6 +78,43 @@
                         </div>
                     </div>
                     <div class="button"><input type="submit" value="Add"></div>
+                </form>
+            </div>
+        </div>
+        <div class="container-update">
+            <div class="exit-btnUpdate">
+                <img src="cross.png" alt="">
+            </div>
+            <div class="title">Book Info</div>
+            <div class="content">
+                <form name="update" id="update">
+                    <div class="insert">
+                        <div class="box">
+                            <span class="text">Book Title</span>
+                            <input type="text" placeholder="Book Title" name="title" id="titleU" required>
+                        </div>
+                        <div class="box">
+                            <span class="text">Book Author</span>
+                            <input type="text" placeholder="Book Author" name="author" id="authorU">
+                        </div>
+                        <div class="box">
+                            <span class="text">Publisher</span>
+                            <input type="text" placeholder="Publisher" name="publisher" id="publisherU">
+                        </div>
+                        <div class="box">
+                            <span class="text">Year</span>
+                            <input type="text" placeholder="Publish Year" name="year" id="yearU">
+                        </div>
+                        <div class="box">
+                            <span class="text">Genre</span>
+                            <input type="text" placeholder="Genre" name="genre" id="genreU">
+                        </div>
+                        <div class="box">
+                            <span class="text">Amount</span>
+                            <input type="number" placeholder="Amount" name="amount" id="amountU" required>
+                        </div>
+                    </div>
+                    <div class="button"><input type="submit" value="Update"></div>
                 </form>
             </div>
         </div>
