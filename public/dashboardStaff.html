@@ -23,7 +23,7 @@
     </nav>
     <div class="main-dash">
         <div class="add-book">
-            <div>
+            <div onclick="addBook()">
                 <div class="add-icon">
                     <img src="add.png" alt="">
                 </div>
@@ -43,7 +43,45 @@
         </form>
     </div>
     <table class="books-render"></table>
-
+    <div class="overlay">
+        <div class="container-add">
+            <div class="exit-btnAdd">
+                <img src="cross.png" alt="">
+            </div>
+            <div class="title">Book Info</div>
+            <div class="content">
+                <form name="add" id="add">
+                    <div class="insert">
+                        <div class="box">
+                            <span class="text">Book Title</span>
+                            <input type="text" placeholder="Book Title" name="title" id="titleA" required>
+                        </div>
+                        <div class="box">
+                            <span class="text">Book Author</span>
+                            <input type="text" placeholder="Book Author" name="author" id="authorA">
+                        </div>
+                        <div class="box">
+                            <span class="text">Publisher</span>
+                            <input type="text" placeholder="Publisher" name="publisher" id="publisherA">
+                        </div>
+                        <div class="box">
+                            <span class="text">Year</span>
+                            <input type="text" placeholder="Publish Year" name="year" id="yearA">
+                        </div>
+                        <div class="box">
+                            <span class="text">Genre</span>
+                            <input type="text" placeholder="Genre" name="genre" id="genreA">
+                        </div>
+                        <div class="box">
+                            <span class="text">Amount</span>
+                            <input type="number" placeholder="Amount" name="amount" id="amountA" required>
+                        </div>
+                    </div>
+                    <div class="button"><input type="submit" value="Add"></div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
             integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
             crossorigin="anonymous"

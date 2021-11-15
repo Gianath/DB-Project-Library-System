@@ -51,13 +51,35 @@ const getBooks = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const id = req.params.id;
-  const result = await sql.query`DELETE FROM Book
-        WHERE BookID = ${id}`;
-  res.json({ result: result.rowsAffected });
+  try {
+    const id = req.params.id;
+    const result = await sql.query`DELETE FROM Book
+          WHERE BookID = ${id}`;
+    res.json({ result: result.rowsAffected });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const addBook = async (req, res) => {
+  try {
+    let id = 'BN' + Date.now().toString().substr(0, 11);
+    const data = req.body;
+    const result = await sql.query`INSERT INTO Book VALUES(${id}, ${
+      data.title
+    }, ${data.author ? data.author : null}, ${
+      data.publisher ? data.publisher : null
+    }, ${data.year ? data.year : null}, ${data.genre ? data.genre : null}, ${
+      data.amount
+    })`;
+    res.json({ result: result.rowsAffected });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
   getBooks,
   deleteBook,
+  addBook,
 };

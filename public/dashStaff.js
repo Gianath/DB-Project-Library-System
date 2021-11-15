@@ -6,6 +6,19 @@ const searchBar = document.querySelector('#search');
 const showbooksDOM = document.querySelector('#show-book');
 const returnbooksDOM = document.querySelector('#return-book');
 
+// pop-up overlay
+const overlay = document.querySelector('.overlay');
+// pop-up Add
+const containerAdd = document.querySelector('.container-add');
+const formAddDOM = document.querySelector('#add');
+const exitbtnAdd = document.querySelector('.exit-btnAdd');
+const titleFormAdd = document.querySelector('#titleA');
+const authorFormAdd = document.querySelector('#authorA');
+const publisherFormAdd = document.querySelector('#publisherA');
+const yearFormAdd = document.querySelector('#yearA');
+const genreFormAdd = document.querySelector('#genreA');
+const amountFormAdd = document.querySelector('#amountA');
+
 var currUser = null;
 
 window.onload = async () => {
@@ -78,7 +91,7 @@ const showAllBooks = async () => {
         <th>${BookGenre}</th>
         <th>${BookAmount}</th>
         <th class="btn"><button class="btn-edit" data-id="${BookID}"><img src="edit.png"></button></th>
-        <th class="btn"><button class="btn-delete" data-id="${BookID}"><img src="bin.png"></button></th>
+        <th class="btn"><button class="btn-delete" data-id="${BookID}" data-name="${BookTitle}"><img src="bin.png" onmouseover="this.src='bin-red.png'" onmouseout="this.src='bin.png'"></button></th>
         <th class="btn"><button class="btn-borrow" data-id="${BookID}"><img src="borrowing.png"></button></th>
       </tr>`;
     });
@@ -189,7 +202,7 @@ searchFormDOM.addEventListener('submit', async (e) => {
           <th>${BookGenre}</th>
           <th>${BookAmount}</th>
           <th class="btn"><button class="btn-edit" data-id="${BookID}"><img src="edit.png"></button></th>
-          <th class="btn"><button class="btn-delete" data-id="${BookID}"><img src="bin.png"></button></th>
+          <th class="btn"><button class="btn-delete" data-id="${BookID}" data-name="${BookTitle}"><img src="bin.png" onmouseover="this.src='bin-red.png'" onmouseout="this.src='bin.png'"></button></th>
           <th class="btn"><button class="btn-borrow" data-id="${BookID}"><img src="borrowing.png"></button></th>
         </tr>`;
       });
@@ -242,13 +255,67 @@ bookRenderDOM.addEventListener('click', async (e) => {
   const el = e.target;
   if (el.parentElement.classList.contains('btn-delete')) {
     const id = el.parentElement.dataset.id;
-    try {
-      const {
-        data: { result },
-      } = await axios.delete(`/api/books/${id}`);
-      showAllBooks();
-    } catch (error) {
-      console.log(error);
+    const name = el.parentElement.dataset.name;
+    if (confirm(`Are you sure you want to delete ${name}`)) {
+      try {
+        const {
+          data: { result },
+        } = await axios.delete(`/api/books/${id}`);
+        showAllBooks();
+      } catch (error) {
+        console.log(error);
+      }
     }
+  } else if (el.parentElement.classList.contains('btn-borrow')) {
+  }
+});
+
+//overlay check if click outside box
+overlay.addEventListener('click', (e) => {
+  let el = e.target;
+  if (el == overlay) {
+    overlay.style.display = 'none';
+    containerAdd.style.display = 'none';
+  }
+});
+
+exitbtnAdd.addEventListener('click', (e) => {
+  overlay.style.display = 'none';
+  containerAdd.style.display = 'none';
+});
+
+function addBook() {
+  overlay.style.display = 'flex';
+  containerAdd.style.display = 'block';
+}
+
+formAddDOM.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  overlay.style.display = 'none';
+  containerAdd.style.display = 'none';
+  alert('Success! Book Added');
+  let title = titleFormAdd.value;
+  let author = authorFormAdd.value;
+  let publisher = publisherFormAdd.value;
+  let year = yearFormAdd.value;
+  let genre = genreFormAdd.value;
+  let amount = amountFormAdd.value;
+
+  try {
+    const {
+      data: { result },
+    } = await axios.post(`/api/books/`, {
+      title,
+      author,
+      publisher,
+      year,
+      genre,
+      amount,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  if (showbooksDOM.checked) {
+    showAllBooks();
   }
 });
