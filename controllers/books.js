@@ -151,10 +151,67 @@ const updateBook = async (req, res) => {
   }
 };
 
+const returnBook = async (req, res) => {
+  const id = req.params.id;
+  const bookID = req.body.bookID;
+  try {
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate();
+    const result = await sql.query`UPDATE Borrow
+    SET
+    ReturnDate = ${date}
+    WHERE
+    BorrowID = ${id}`;
+
+    const result2 = await sql.query`UPDATE Book
+    SET BookAmount = BookAmount+1
+    FROM Book b JOIN BorrowDetail bd ON b.BookID=bd.BookID
+    WHERE
+    BorrowID = ${id} AND b.BookID = ${bookID}`;
+    res.json({ result: result.rowsAffected, result2: result2.rowsAffected });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const borrowBook = async (req, res) => {
+  const bookID = req.body.Bookid;
+  const StudentID = req.body.StudentID;
+  const libID = req.body.LibID;
+  const borrowID = 'LB' + Math.floor(Math.random() * 100000);
+  const today = new Date();
+  const date =
+    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  try {
+    const result = await sql.query`INSERT INTO Borrow VALUES
+    (${borrowID}, ${libID}, ${StudentID}, ${date}, null)`;
+    const result2 = await sql.query`INSERT INTO BorrowDetail VALUES
+    (${bookID}, ${borrowID})`;
+    const result3 = await sql.query`UPDATE Book
+    SET BookAmount = BookAmount-1
+    WHERE
+    BookID = ${bookID}`;
+    res.json({
+      result: result.rowsAffected,
+      result2: result2.rowsAffected,
+      result3: result3.rowsAffected,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getBooks,
   deleteBook,
   addBook,
   getSingleBook,
   updateBook,
+  returnBook,
+  borrowBook,
 };

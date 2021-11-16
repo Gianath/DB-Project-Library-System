@@ -152,7 +152,7 @@ const showReturnBook = async () => {
       <th>${book.BorrowDate.substring(0, 10)}</th>
       <th class="btn"><button class="btn-return" data-id="${
         book.BorrowID
-      }"><img src="return.png"></button></th>
+      }" data-bookID="${book.BookID}"><img src="return.png"></button></th>
     </tr>`;
     });
     books.unshift(headerhtml);
@@ -250,7 +250,7 @@ searchFormDOM.addEventListener('submit', async (e) => {
       <th>${book.BorrowDate.substring(0, 10)}</th>
       <th class="btn"><button class="btn-return" data-id="${
         book.BorrowID
-      }"><img src="return.png"></button></th>
+      }" data-bookID="${book.BookID}"><img src="return.png"></button></th>
     </tr>`;
       });
       books.unshift(headerhtml);
@@ -260,6 +260,38 @@ searchFormDOM.addEventListener('submit', async (e) => {
     console.log(error);
   }
 });
+
+async function validateStudent(id) {
+  try {
+    const {
+      data: { result },
+    } = await axios.get(`/api/login/member/${id}`);
+    if (result.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return false;
+}
+
+async function validateBook(id) {
+  try {
+    const {
+      data: { result },
+    } = await axios.get(`/api/books/${id}`);
+    if (result[0].BookAmount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return false;
+}
 
 bookRenderDOM.addEventListener('click', async (e) => {
   const el = e.target;
@@ -294,6 +326,46 @@ bookRenderDOM.addEventListener('click', async (e) => {
         result[0].BookGenre != null ? result[0].BookGenre : '';
       amountFormUpdate.value = result[0].BookAmount;
       updateBook();
+    } catch (error) {
+      console.log(error);
+    }
+  } else if (el.parentElement.classList.contains('btn-return')) {
+    const id = el.parentElement.dataset.id;
+    const bookID = el.parentElement.dataset.bookid;
+    try {
+      const {
+        data: { result },
+      } = await axios.patch(`/api/books/return/${id}`, {
+        bookID,
+      });
+      showReturnBook();
+    } catch (error) {
+      console.log(error);
+    }
+  } else if (el.parentElement.classList.contains('btn-borrow')) {
+    const Bookid = el.parentElement.dataset.id;
+    const StudentID = prompt('Please enter your StudentID');
+    if (!StudentID) {
+      return;
+    }
+    if (!(await validateStudent(StudentID))) {
+      alert('Enter a valid StudentID!');
+      return;
+    }
+    if (!(await validateBook(Bookid))) {
+      alert('Book not enough!');
+      return;
+    }
+    try {
+      const {
+        data: { result },
+      } = await axios.post(`/api/books/borrow/`, {
+        Bookid,
+        StudentID,
+        LibID: currUser.LibID,
+      });
+      showAllBooks();
+      alert('Borrow Successfull');
     } catch (error) {
       console.log(error);
     }

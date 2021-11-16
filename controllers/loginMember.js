@@ -18,6 +18,16 @@ const getMember = async (req, res) => {
     console.log(error);
   }
 };
+const getSingleStudent = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result =
+      await sql.query`SELECT * FROM Student WHERE StudentID = ${id}`;
+    res.json({ result: result.recordset });
+  } catch (error) {
+    console.log(error);
+  }
+};
 const logout = async (req, res) => {
   current = null;
   res.json({ msg: 'You have logged out' });
@@ -26,4 +36,5 @@ module.exports = {
   getMember,
   getCurrMember,
   logout,
+  getSingleStudent,
 };
