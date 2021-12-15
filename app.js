@@ -17,7 +17,7 @@ const start = async () => {
     await sql.connect();
     app.listen(port, console.log(`Server is listening on port ${port}...`));
   } catch (err) {
-    console.log(error);
+    console.log(err);
   }
 };
 
