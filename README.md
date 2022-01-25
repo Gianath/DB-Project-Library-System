@@ -2,10 +2,10 @@
 Library System
 
 ## Installation
-1. Install nodejs from nodejs official website
+1. Install Node.JS from Node.JS official website
 https://nodejs.org/en/
 
-2. Open in Visual Studio Code
+2. Open in Visual Studio Code Or Other Text Editor and IDE
  
 3. Install Dependencies.
 Run in Visual Studio Code Terminal
