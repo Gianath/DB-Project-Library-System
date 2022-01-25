@@ -13,7 +13,7 @@ Run in Visual Studio Code Terminal
 npm install
 ```
 
-4. Make sure Database is created in SSMS
+4. Make sure Database is created in SSMS (SQL Server Management Studio)
 
 ## Usage
 
