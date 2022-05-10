@@ -1,5 +1,5 @@
-# Web-App-ProjectDatabase
-This is a simple Library System. This project is made for a Database System Project Assignment.\
+# DB-Project-Library-System 
+This is a simple Library System Web Application. This project is made for a Database System Project Assignment.\
 This is made using HTML, CSS, Javascript, Node.JS and Microsoft SQL.
 
 ## Installation
