@@ -1,5 +1,6 @@
 # Web-App-ProjectDatabase
-Library System
+This is a simple Library System. This project is made for a Database System Project Assignment.
+This is made using HTML, CSS, Javascript, Node.JS and Microsoft SQL.
 
 ## Installation
 1. Install Node.JS from Node.JS official website
