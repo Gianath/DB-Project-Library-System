@@ -1,15 +1,9 @@
 CREATE DATABASE [MSLibrary]
-DROP DATABASE MSLibrary
+
 GO
 USE MSLibrary
-SELECT StudentName
-FROM Student
-WHERE StudentName = ANY
-(
-	SELECT StudentName
-	FROM Student s JOIN Borrow b ON s.StudentID=b.StudentID
-	WHERE ReturnDate is null
-)
+
+GO
 CREATE TABLE Student(
 	StudentID CHAR(10) PRIMARY KEY,
 	StudentName VARCHAR(255) NOT NULL,
@@ -48,6 +42,8 @@ CREATE TABLE BorrowDetail(
 )
 
 GO
+/*
+For Testing
 SELECT * FROM Librarian
 INSERT INTO Student VALUES('2440007062', 'Gian','heeder','binus@gmail.com')
 
@@ -63,7 +59,7 @@ SELECT BookGenre, SUM(BookAmount)
 FROM Book
 GROUP BY BookGenre
 Having SUM(BookAmount) > 1
-
+*/
 
 insert into Book values
 	('BN12365478919', 'Henry Poutter', 'J.K. Soaring', null, null, 'Novel', '5'), 
